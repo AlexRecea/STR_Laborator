@@ -1,5 +1,7 @@
+import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.CyclicBarrier;
+import java.util.concurrent.Exchanger;
 import java.util.concurrent.Semaphore;//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 public class Main {
     public static void main(String[] args) {
@@ -42,6 +44,7 @@ public class Main {
         fir3.start();
         */
 
+        /*
         CountDownLatch countDownLatchInitial = new CountDownLatch(1);
         CountDownLatch countDownLatchFinal = new CountDownLatch(3);
         ExecutionThreadApp2Fir1 fir1 = new ExecutionThreadApp2Fir1(2,3,7,countDownLatchFinal,countDownLatchInitial);
@@ -50,6 +53,12 @@ public class Main {
         fir1.start();
         fir2.start();
         fir3.start();
+        */
 
+        Exchanger<List<Integer>> exchanger = new Exchanger<List<Integer>>();
+        FirExchange f1 = new FirExchange(exchanger,"Duke",1000);
+        FirExchange f2 = new FirExchange(exchanger,"Wild Wings",1000);
+        f1.start();
+        f2.start();
     }
 }
